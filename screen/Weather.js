@@ -1,12 +1,15 @@
 import React from "react";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import { StyleSheet, Text, View, ImageBackground, Button} from "react-native";
 import background from "../assets/back4.jpeg";
 
-const Weather = () => { 
+const Weather = ({ navigation }) => { 
     return(
         <ImageBackground source={background} style={styles.container}>
             <View style={styles.temperature}>
                 <Text style={styles.text}>75°C</Text>
+                <View style={styles.buttonWrapper}>
+                    
+                </View>
             </View>
             <View style={styles.data}>
                 <View style={styles.spacer}></View>
@@ -20,12 +23,11 @@ const Weather = () => {
                         <Text style={styles.title}>Pressure</Text>
                     </View>
                 </View>
-
             </View>
-
         </ImageBackground>
     )
 } 
+
 
 export default Weather;
 
@@ -46,15 +48,15 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: "black",
         fontWeight: "100",
-        paddingRight: 50
+        paddingRight: 50,
+        padding: 50,
+        marginTop: 80
     },
     data: {
         flex: 1,
         textAlign: "center",
         justifyContent: "center",
         width: "100%",
-    
-  
     },
     spacer: {
         height: "30%"
@@ -75,13 +77,11 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-
     },
     pressure: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-
     },
     dataText: {
         fontSize: 20,
@@ -89,7 +89,6 @@ const styles = StyleSheet.create({
         fontFamily: "Helvetica",
         color: "white",
         fontWeight: "200"
-
     },
     title: {
         fontSize: 20,
@@ -97,6 +96,17 @@ const styles = StyleSheet.create({
         color: "white",
         textAlign: "center",
         fontFamily: "Helvetica"
-
     },
+    buttonWrapper: {
+        flexDirection: "row",
+        justifyContent: "space-around",
+        marginVertical: 20
+    },
+    button: {
+        
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        borderRadius: 10,
+    }
 });
+
