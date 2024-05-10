@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, ImageBackground, Button} from "react-native";
 import background from "../assets/back4.jpeg";
+import { db, ref, onValue } from "../firebase";
+import { useState, useEffect } from "react";
 
-const Weather = ({ navigation }) => { 
+const Weather = ({}) => { 
+    const [temp, setTemp] = useState(60);
+    const [humid, setHumidity] = useState(30);
+    const [pressure, setPresure] = useState(15);
+
+    useEffect(() => {
+        const data = ref(db)
+
+        onValue(data, (snapshot) => {
+            setTemp(snapshot.val().Temp);
+            setHumidity(snapshot.val().Humid);
+            setPresure(snapshot.val().Pressure);
+
+        });
+    }, [db]);
+    
     return(
         <ImageBackground source={background} style={styles.container}>
             <View style={styles.temperature}>
-                <Text style={styles.text}>75°C</Text>
+                <Text style={styles.text}>{temp}°</Text>
                 <View style={styles.buttonWrapper}>
                     
                 </View>
@@ -15,11 +32,11 @@ const Weather = ({ navigation }) => {
                 <View style={styles.spacer}></View>
                 <View style={styles.dataWrapper}>
                     <View style={styles.humidity}>
-                        <Text style={styles.dataText}>23%</Text>
+                        <Text style={styles.dataText}>{humid}%</Text>
                         <Text style={styles.title}>Humidity</Text>
                     </View>
                     <View style={styles.pressure}>
-                        <Text style={styles.dataText}>0.5 ATM</Text>
+                        <Text style={styles.dataText}>{pressure}ATM</Text>
                         <Text style={styles.title}>Pressure</Text>
                     </View>
                 </View>
